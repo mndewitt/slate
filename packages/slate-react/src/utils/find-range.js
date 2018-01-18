@@ -21,7 +21,8 @@ function findRange(native, value) {
 
   // If the `native` object is a DOM `Range` or `StaticRange` object, change it
   // into something that looks like a DOM `Selection` instead.
-  if (native instanceof window.Range || (window.StaticRange && native instanceof window.StaticRange)) {
+  const nativeInstanceName = native.constructor.name
+  if (native instanceof window.Range || nativeInstanceName === 'StaticRange') {
     native = {
       anchorNode: native.startContainer,
       anchorOffset: native.startOffset,
